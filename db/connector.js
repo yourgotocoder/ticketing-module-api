@@ -9,7 +9,7 @@ async function mongoDBConnector(dbUserName, dbPassword, callbackFn) {
         result
             ? console.log("Connected successfully to mongo database")
             : new Error(`Error connecting to database`);
-        callbackFn();
+        return callbackFn;
     } catch (err) {
         console.log(err);
     }

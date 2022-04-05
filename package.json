@@ -1,0 +1,35 @@
+{
+  "name": "ticketing-module",
+  "version": "1.0.0",
+  "description": "An api to track the status of various tasks handed to the members of an organization",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourgotocoder/ticketing-module-api.git"
+  },
+  "keywords": [
+    "Ticketing",
+    "status",
+    "tracking",
+    "project",
+    "completion",
+    "success",
+    "rate"
+  ],
+  "author": "Sudarshan Rai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourgotocoder/ticketing-module-api/issues"
+  },
+  "homepage": "https://github.com/yourgotocoder/ticketing-module-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

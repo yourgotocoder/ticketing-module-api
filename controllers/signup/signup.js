@@ -1,4 +1,5 @@
 const UserModel = require("../../db/models/userSchema.model");
+const emailValidate = require("../helpers/emailValidation");
 
 async function singup(req, res) {
     try {
@@ -9,11 +10,11 @@ async function singup(req, res) {
             mobile_number,
             mobile_number_alternate,
         } = req.body;
-        const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //Verification for valid email, copy pasted the expression from google
 
-        if (!regexEmail.test(email)) {
+        //Verification for valid email, copy pasted the expression from google
+        if (!emailValidate(email)) {
             throw new Error(`Invalid email`); //Throwing error seems better than sending a response, better error handling
-        } else if (regexEmail.test(email)) {
+        } else if (emailValidate(email)) {
             const ExistingUser = await UserModel.findOne({ email });
             if (ExistingUser) {
                 throw new Error(`User with email already exists`);

@@ -4,9 +4,10 @@ const route = require("express").Router();
 
 //Custom controller imports
 const singup = require("../controllers/signup/signup");
+const login = require("../controllers/authentication/authentication");
 
 route.post("/signup", singup);
-route.post("/login");
+route.post("/login", login);
 route.post("/logout");
 
 //Startup code, hello world

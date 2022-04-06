@@ -9,6 +9,7 @@ const app = express();
 
 //Middlewares
 app.use(cors());
+app.use(express.json());
 
 //Custom middlewares
 const mainRouter = require("./routes/index");

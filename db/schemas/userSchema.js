@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     name: String,
     registered_on: String,
     date_of_birth: String,
-    mobile_number: Number,
+    mobile_number_primary: Number,
     mobile_number_alternate: Number,
     role: {
         type: Number,

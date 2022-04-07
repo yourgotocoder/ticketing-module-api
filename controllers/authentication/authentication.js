@@ -5,6 +5,7 @@ const UserSchema = require("../../db/models/userSchema.model");
 const emailValidate = require("../helpers/emailValidation");
 const responseData = require("../helpers/responseData");
 const passwordValidate = require("../helpers/passwordValidation");
+const removeSensitiveInfo = require("../helpers/removeSensitiveInfo");
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -26,11 +27,8 @@ const login = async (req, res) => {
                 if (hashdedPassword !== foundUser.password) {
                     throw new Error("Password does not match");
                 } else if (hashdedPassword === foundUser.password) {
-                    const userData = {
-                        ...foundUser._doc,
-                        password: "",
-                        secret_key: "",
-                    };
+                    const userData = removeSensitiveInfo(foundUser._doc);
+
                     const token = jwt.sign(
                         userData,
                         process.env.JWT_SECRET_KEY,

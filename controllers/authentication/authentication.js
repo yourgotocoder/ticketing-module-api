@@ -1,4 +1,6 @@
 //Authentication, I will probably just implement a basic jwt authentication for now
+const jwt = require("jsonwebtoken");
+
 const UserSchema = require("../../db/models/userSchema.model");
 const emailValidate = require("../helpers/emailValidation");
 const responseData = require("../helpers/responseData");
@@ -21,16 +23,21 @@ const login = async (req, res) => {
                     sercretKey,
                     password
                 );
-                console.log(hashdedPassword);
                 if (hashdedPassword !== foundUser.password) {
                     throw new Error("Password does not match");
                 } else if (hashdedPassword === foundUser.password) {
+                    const userData = {
+                        ...foundUser._doc,
+                        password: "",
+                        secret_key: "",
+                    };
+                    const token = jwt.sign(
+                        userData,
+                        process.env.JWT_SECRET_KEY,
+                        { expiresIn: "24h" }
+                    );
                     res.json(
-                        responseData(false, "Logged In Successfully", {
-                            ...foundUser._doc,
-                            password: "",
-                            secret_key: "",
-                        })
+                        responseData(false, "Logged In Successfully", token)
                     );
                 }
             }

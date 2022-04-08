@@ -1,7 +1,8 @@
-const removeSensitiveInfo = (userData) => ({
-    ...userData,
-    password: "",
-    secret_key: "",
-});
+const removeSensitiveInfo = (userData) => {
+    const data = { ...userData };
+    delete data["password"];
+    delete data["secret_key"];
+    return data;
+};
 
 module.exports = removeSensitiveInfo;

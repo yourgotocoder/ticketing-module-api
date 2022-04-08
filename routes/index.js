@@ -6,9 +6,11 @@ const expressJwt = require("express-jwt");
 //Custom controller imports
 const singup = require("../controllers/signup/signup");
 const login = require("../controllers/authentication/authentication");
+const resetPassword = require("../controllers/authentication/resetPassword");
 
 route.post("/signup", singup);
 route.post("/login", login);
+route.use("/reset-password", resetPassword);
 route.post(
     "/logout",
     expressJwt({ secret: process.env.JWT_SECRET_KEY, algorithms: ["HS256"] }),

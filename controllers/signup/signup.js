@@ -1,5 +1,6 @@
 const UserModel = require("../../db/models/userSchema.model");
 const emailValidate = require("../helpers/emailValidation");
+const sendEmail = require("../helpers/sendEmail");
 
 async function singup(req, res) {
     try {
@@ -36,6 +37,8 @@ async function singup(req, res) {
                     mobile_number_alternate: mobile_number_alternate,
                 });
                 const savedUser = await newUser.save();
+                const htmlContent = `<h3>Welcome ${name}</h3><p>Your account have been created successfully, thank you for signing up</p>`;
+                sendEmail(email, htmlContent, "Account created successfully!!");
                 res.json({
                     error: false,
                     message: "Signup successfull",
